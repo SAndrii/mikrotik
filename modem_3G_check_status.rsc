@@ -4,6 +4,7 @@
 #
 # If status ppp-out2 not connected then check three times with delay 10s, try to reset modem inputted in mini-PCIe slot, typing AT command
 #
+# Type your interface name and usb port below
 :local PPPInter "ppp-out2";
 :local PortUsb "usb4"
 :local count 0;
@@ -23,9 +24,3 @@
 :if ( $count = 4 ) do={ 
    :log warning "Check modem script stop";
 }
-
-Run script every houre:
-/system scheduler add name="modem_3G_check_status" start-time="06:10:00" interval="1h" on-event={ /system script run modem_3G_check_status } policy="read,write,test,policy"
-
-Also useful practice is to reboot device
-/system scheduler add name="reboot" start-time="06:00:00" interval="1d" on-event={ /system reboot } policy="read,write,test,policy,reboot"
